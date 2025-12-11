@@ -124,11 +124,47 @@ images: {
 },
 
 icons: {
-    phone: "📞",
-    email: "✉️",
-    location: "📍",
-    clock: "⏰",
+    social:{
+        facebook: "FiFacebook",
+        instagram: "FiInstagram",
+        twitter: "FiTwitter",
+        phone: "FiPhone",
+        email: "FiMail",
+        location: "FiMapPin",
+
+    },
+    serviceIcons: {
+        haircut: "FiScissors",
+        beard: "FiZap",
+        color: "FiDroplet",
+        shave: "FiWind",
+    }
 },
+
+businessRules:{
+    appointment:{
+        minAdvanceBookingHours: 2,
+        maxAdvanceBookingHours: 30,
+        slotDurationMinutes: 30,
+        dailySlots:{
+            start: "09:00",
+            end: "19:00",
+            breakStart: "13:00",
+            breakEnd: "14:00",
+        },
+        sameDayBooking:true,
+        bufferTimeMinutes:15,
+    },
+    cancellationPolicy:{
+        freeCancellationHours:24,
+        lateCancellationFeePercentage:50,
+        noShowerFeePercentage:100,
+    }
+},
+
+timeSlots:[
+    
+]
 
 };
 
