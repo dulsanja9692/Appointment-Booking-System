@@ -13,11 +13,11 @@ if(!mongodbName){
 
 export default async function connectDb(){
     try{
-        await mongoose.connect(mongodbUri ,{dbName:mongodbName})
+        mongoose.connect(mongodbUri ,{dbName:mongodbName})
         console.log("Database Connection Successful")
     }catch(err){
     
-        console.error("Error connecting to MongoDB:", err)
+        console.error(err)
 
 }
 }
