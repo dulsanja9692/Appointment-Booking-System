@@ -1,27 +1,24 @@
-import { MongoClient } from 'mongodb';
+import mongoose from "mongoose";
 
-if (!process.env.MONGODB_URI) {
-  throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
+const mongodbUri =  process.env.MONGODB_URI as string
+const mongodbName = process.env.MONGODB_NAME as string
+
+if(!mongodbUri){
+    throw new Error("Mongodb uri not set")
 }
 
-const uri = process.env.MONGODB_URI;
-
-let client: MongoClient;  // --- changed const to let
-let clientPromise: Promise<MongoClient>;
-
-if (process.env.NODE_ENV === 'development') {
-  const globalWithMongo = global as typeof globalThis & {
-    _mongoClientPromise?: Promise<MongoClient>;
-  };
-
-  if (!globalWithMongo._mongoClientPromise) {
-    client = new MongoClient(uri);
-    globalWithMongo._mongoClientPromise = client.connect();
-  }
-  clientPromise = globalWithMongo._mongoClientPromise;
-} else {
-  client = new MongoClient(uri); // now allowed
-  clientPromise = client.connect();
+if(!mongodbName){
+    throw new Error("Mongodb name not set")
 }
 
-export default clientPromise;
+export default async function connectDb(){
+    try{
+        await mongoose.connect(mongodbUri ,{dbName:mongodbName})
+        console.log("Database Connection Successful")
+    }catch(err){
+    
+        console.error("Error connecting to MongoDB:", err)
+
+}
+}
+
